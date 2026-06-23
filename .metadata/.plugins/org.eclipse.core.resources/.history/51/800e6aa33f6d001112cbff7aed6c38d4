@@ -1,0 +1,5 @@
+package com.saurav.registration.entity;
+
+public class User {
+
+}

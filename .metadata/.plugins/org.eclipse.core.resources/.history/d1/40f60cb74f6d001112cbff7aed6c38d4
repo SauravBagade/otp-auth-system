@@ -1,0 +1,29 @@
+package com.saurav.registration.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.saurav.registration.dto.RegisterRequest;
+import com.saurav.registration.service.UserService;
+import com.saurav.registration.dto.VerifyOtpRequest;
+
+@RestController
+@RequestMapping("/api/user")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public String registerUser(@RequestBody RegisterRequest request) {
+
+        return userService.registerUser(request);
+    }
+    @PostMapping("/verify-otp")
+    public String verifyOtp(@RequestBody VerifyOtpRequest request) {
+
+        return userService.verifyOtp(
+                request.getMobileNumber(),
+                request.getOtp());
+    }
+}

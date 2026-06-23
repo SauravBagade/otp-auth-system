@@ -1,0 +1,67 @@
+package com.saurav.registration.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.saurav.registration.dto.RegisterRequest;
+import com.saurav.registration.service.UserService;
+import com.saurav.registration.dto.VerifyOtpRequest;
+import com.saurav.registration.dto.LoginRequest;
+import com.saurav.registration.dto.ForgotPasswordRequest;
+import com.saurav.registration.dto.ResetPasswordRequest;
+import com.saurav.registration.dto.ChangePasswordRequest;
+@RestController
+@RequestMapping("/api/user")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public String registerUser(@RequestBody RegisterRequest request) {
+
+        return userService.registerUser(request);
+    }
+    @PostMapping("/verify-otp")
+    public String verifyOtp(@RequestBody VerifyOtpRequest request) {
+
+        return userService.verifyOtp(
+                request.getMobileNumber(),
+                request.getOtp());
+    }
+    @PostMapping("/login")
+    public String loginUser(@RequestBody LoginRequest request) {
+
+        return userService.loginUser(request);
+    }
+    @PostMapping("/forgot-password")
+    public String forgotPassword(
+            @RequestBody ForgotPasswordRequest request) {
+
+        return userService.forgotPassword(
+                request.getEmail());
+    }
+    @PostMapping("/reset-password")
+    public String resetPassword(
+            @RequestBody ResetPasswordRequest request) {
+
+        return userService.resetPassword(
+                request.getEmail(),
+                request.getOtp(),
+                request.getNewPassword());
+    }
+    @PostMapping("/change-password")
+    public String changePassword(
+            @RequestBody ChangePasswordRequest request) {
+
+        return userService.changePassword(
+                request.getEmail(),
+                request.getOldPassword(),
+                request.getNewPassword());
+    }
+    @PostMapping("/logout")
+    public String logout() {
+
+        return "Logout Successful. Please remove JWT Token.";
+    }
+}

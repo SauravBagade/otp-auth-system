@@ -1,0 +1,5 @@
+package com.saurav.registration.config;
+
+public class SecurityConfig {
+
+}

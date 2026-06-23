@@ -1,0 +1,5 @@
+package com.saurav.registration.exception;
+
+public class GlobalExceptionHandler {
+
+}
